@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-<div class="panel default-panel">
+<div class="panel panel-default">
     <div class="panel-heading text-center">Create New Post</div>
     <div class="panel-body">
         <form action="{{ route('post.store') }}" method="post">
@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="featured">Featured Image</label>
-                <input type="file" name="featured" class="form-control">
+                <input type="file" name="featured" class="form-control-file">
             </div>
             <div class="form-group">
                 <label for="">Content</label>
