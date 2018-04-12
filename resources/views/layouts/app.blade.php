@@ -73,6 +73,7 @@
 
         <div class="container">
             <div class="row">
+                @if(Auth::check())
                 <div class="col-lg-4">
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -83,6 +84,7 @@
                         </li>
                     </ul>
                 </div>
+                @endif
                 <div class="col-lg-8">
                     @yield('content')
                 </div>
