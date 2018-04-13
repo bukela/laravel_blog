@@ -60,6 +60,7 @@ class PostsController extends Controller
         $post->featured = 'uploads/posts/'.$featured_name;
         $post->category_id = $request->category_id;
         $post->save();
+        Session::flash('success', 'Post created successfully !');
         return redirect(route('posts'));
         
     }
