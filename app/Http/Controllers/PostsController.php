@@ -45,13 +45,22 @@ class PostsController extends Controller
         $featured = $request->featured;
         $featured_name = time().$featured->getClientOriginalName();
         $featured->move('uploads/posts', $featured_name);
+        
+        //nacin sa Post::create
+        // $post = Post::create([
+        //     'title' => $request->title,
+        //     'content' => $request->content,
+        //     'featured' => 'uploads/posts/'.$featured_name,
+        //     'category_id' => $request->category_id
+        // ]);
 
         $post = new Post;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->featured = 'uploads/posts/'.$featured_name ;
+        $post->featured = 'uploads/posts/'.$featured_name;
         $post->category_id = $request->category_id;
         $post->save();
+        return redirect(route('posts'));
         
     }
 
