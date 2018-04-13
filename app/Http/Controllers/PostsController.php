@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
+use Session;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -61,7 +62,7 @@ class PostsController extends Controller
         $post->category_id = $request->category_id;
         $post->save();
         Session::flash('success', 'Post created successfully !');
-        return redirect(route('posts'));
+        // return redirect(route('posts'));
         
     }
 
