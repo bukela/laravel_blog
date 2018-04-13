@@ -19,10 +19,10 @@
                 {{ $item->name }}
             </td>
             <td>
-            <a href="{{  }}" class="button btn btn-info btn-sm">Edit</a>
+            <a href="{{ route('category.edit',['id' => $item->id])  }}" class="button btn btn-info btn-sm">Edit</a>
             </td>
             <td>
-                <a href="" class="button btn btn-danger btn-sm">Delete</a>
+                <a href="{{ route('category.delete',['id' => $item->id])  }}" class="button btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
         @endforeach
