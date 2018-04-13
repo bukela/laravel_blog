@@ -104,6 +104,15 @@
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script>
         @if(Session::has('success'))
+        toastr.options = {
+                "debug": false,
+                "positionClass": "toast-top-center",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 1000,
+                "extendedTimeOut": 1000
+            }
             toastr.success("{{ Session::get('success') }}")
         @endif
     </script>
