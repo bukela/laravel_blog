@@ -49,6 +49,7 @@ class PostsController extends Controller
             'content' => 'required',
             'featured' => 'required|image',
             'category_id' => 'required',
+            'tags' => 'required'
         ]);
         $featured = $request->featured;
         $featured_name = time().$featured->getClientOriginalName();
@@ -69,6 +70,7 @@ class PostsController extends Controller
         $post->category_id = $request->category_id;
         $post->slug = str_slug($request->title);
         $post->save();
+        $post->tags()->attach($request->tags);
         Session::flash('success', 'Post created successfully !');
         return redirect(route('posts'));
         
@@ -93,9 +95,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
+        $tags = Tag::all();
         $post = Post::find($id);
         $category = Category::all();
-        return view('admin.posts.edit', compact('post', 'category'));
+        return view('admin.posts.edit', compact('post', 'category','tags'));
     }
 
     /**
@@ -126,6 +129,7 @@ class PostsController extends Controller
         $post->category_id = $request->category_id;
 
         $post->save();
+        $post->tags()->sync($request->tags); //proverava i apdejtuje tagove
         Session::flash('success', 'Post updated successfully');
         return redirect(route('posts'));
     }
