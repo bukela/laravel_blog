@@ -89,7 +89,7 @@ class TagsController extends Controller
         $tag->tag = $request->tag;
         $tag->save();
         Session::flash('success', 'Tag edited successfully');
-        return redirect()->back();
+        return redirect(route('tags'));
     }
 
     /**

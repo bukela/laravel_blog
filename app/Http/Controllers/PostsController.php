@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Post;
+use App\Tag;
 use App\Category;
 use Session;
 use Illuminate\Http\Request;
@@ -27,11 +28,12 @@ class PostsController extends Controller
     public function create()
     {
         $category = Category::all();
+        $tags = Tag::all();
         if($category->count()==0) {
             Session::flash('info', 'You must have category to make post');
             return redirect()->back();
         }
-        return view('admin.posts.create', compact('category'));
+        return view('admin.posts.create', compact('category','tags'));
     }
 
     /**
