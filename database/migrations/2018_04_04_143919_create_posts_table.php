@@ -17,8 +17,10 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('category_id');
+            $table->string('slug');
             $table->text('content');
             $table->string('featured');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -81,6 +81,9 @@
                         <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="list-group-item">
+                            <a href="{{ route('posts') }}">Posts</a>
+                            </li>
+                        <li class="list-group-item">
                         <a href="{{ route('post.create') }}">Create New Post</a>
                         </li>
                         <li class="list-group-item">
@@ -115,6 +118,19 @@
             }
             toastr.success("{{ Session::get('success') }}")
         @endif
+
+        @if(Session::has('info'))
+        toastr.options = {
+                "debug": false,
+                "positionClass": "toast-top-center",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 2000,
+                "timeOut": 1000,
+                "extendedTimeOut": 1000
+            }
+            toastr.info("{{ Session::get('info') }}")
+            @endif
     </script>
 </body>
 </html>
