@@ -81,8 +81,11 @@
                         <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('posts') }}">Posts</a>
-                            </li>
+                        <a href="{{ route('posts') }}">Posts</a>
+                        </li>
+                        <li class="list-group-item">
+                        <a href="{{ route('posts.trashed') }}">Trashed Posts</a>
+                        </li>
                         <li class="list-group-item">
                         <a href="{{ route('post.create') }}">Create New Post</a>
                         </li>

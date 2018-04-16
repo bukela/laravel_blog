@@ -91,7 +91,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        $category = Category::all();
+        return view('admin.posts.edit', compact('post', 'category'));
     }
 
     /**
@@ -103,7 +105,27 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        $post = Post::find($id);
+
+        if($request->hasFile('featured')) { //provera da li je user menjao sliku
+            $featured = $request->featured;
+            $featured_new_name = time().$featured->getClientOriginalName();
+            $featured->move('uploads/posts', $featured_new_name);
+            $post->featured = 'uploads/posts/'.$featured_new_name;
+        }
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+
+        $post->save();
+        Session::flash('success', 'Post updated successfully');
+        return redirect(route('posts'));
     }
 
     /**
@@ -118,5 +140,26 @@ class PostsController extends Controller
         $post->delete();
         Session::flash('success', 'Post deleted');
         return redirect()->back();
+    }
+
+    public function trashed()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view('admin.posts.trashed', compact('posts')); 
+    }
+
+    public function kill($id)
+    {
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->forceDelete(); //brise iz baze
+        Session::flash('success', 'Post permanently deleted');
+        return redirect()->back();
+    }
+
+    public function restore($id) {
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+        Session::flash('success', 'Post restored successfully');
+        return redirect(route('posts'));
     }
 }

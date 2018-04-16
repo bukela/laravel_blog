@@ -1,6 +1,7 @@
 @extends('layouts.app') 
 @section('content')
 <table class="table table-hover">
+        <thead><h3  class="text-center">Categories</h3></thead>
     <thead>
         <th>
             Category name
@@ -13,6 +14,7 @@
         </th>
     </thead>
     <tbody>
+        @if($category->count() > 0)
         @foreach ($category as $item)
         <tr>
             <td>
@@ -26,7 +28,11 @@
             </td>
         </tr>
         @endforeach
-
+        @else
+        <tr>
+           <th colspan="5" class="text-center underline"><h3><u>No categories created</u></h3></th>
+      </tr>
+        @endif
     </tbody>
 </table>
 @endsection
