@@ -8,13 +8,13 @@
     </ul>
 @endif
 <div class="panel panel-default">
-    <div class="panel-heading text-center">Create New Category</div>
+    <div class="panel-heading text-center">Create New Tag</div>
     <div class="panel-body">
-        <form action="{{ route('category.store') }}" method="post">
+        <form action="{{ route('tag.store') }}" method="post">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" class="form-control" autofocus>
+                <input type="text" name="tag" class="form-control" autofocus>
             </div>
             <div class="form-group">
                 <div class="text-center">

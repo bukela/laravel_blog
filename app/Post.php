@@ -25,4 +25,8 @@ class Post extends Model
     public function getFeaturedAttribute($featured) {
         return asset($featured); //vraca full path do slike (http://valele.test...)
     }
+
+    public function tags() {
+        return $this->belongsToMany('App\Tag');
+    }
 }
