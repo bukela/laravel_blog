@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    // public function __construct() {
+    //     $this->middleware('admin');  //postavlja middleware tako da niko ko nije admin ne moze pristupiti metodama kontrolera
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -100,7 +103,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->profile->delete();
+        $user->delete();
+        Session::flash('info', 'User Deleted !');
+        return redirect(route('home'));
     }
 
     public function admin($id) {
