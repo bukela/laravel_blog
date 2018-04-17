@@ -30,7 +30,7 @@
         @endforeach
         @else
         <tr>
-           <th colspan="5" class="text-center underline"><h3><u>No categories created</u></h3></th>
+           <th colspan="5" class="text-center underline"><h3><u>No categories created</u></h3><a href="{{ route('category.create') }}" class="btn btn-default btn-info">Create Category</a></th>
       </tr>
         @endif
     </tbody>
