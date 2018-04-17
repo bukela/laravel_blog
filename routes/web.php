@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+// Route::get('/test', function () {
+//     return App\Profile::find(1)->user;
+// });
 Auth::routes();
 
 
@@ -46,4 +48,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'] , function() {
     Route::get('tag/create', 'TagsController@create')->name('tag.create');
     Route::post('tag/store', 'TagsController@store')->name('tag.store');
 
+    Route::get('users', 'UsersController@index')->name('users');
+    Route::get('user/create', 'UsersController@create')->name('user.create');
+    Route::get('user/admin/{id}', 'UsersController@admin')->name('user.admin');
+    Route::get('user/not-admin/{id}', 'UsersController@not_admin')->name('user.not.admin');
+    Route::post('user/store', 'UsersController@store')->name('user.store');
 });
