@@ -30,11 +30,11 @@
                 </div>
                 <div class="form-group">
                         <label for="tags">Select Tag</label>
-                        @foreach ($tags as $tag)
-                            <div class="checkbox">
-                                <label for=""><input type="checkbox" value="{{ $tag->id }}">{{ $tag->tag }}</label>
-                            </div>
-                        @endforeach
+                        <div class="checkbox">
+                            @foreach ($tags as $tag)
+                                <label for=""><input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->tag }}</label> <br>
+                            @endforeach
+                        </div>
                     </div>    
             <div class="form-group">
                 <label for="">Content</label>
