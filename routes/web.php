@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use App\Notifications\TaskCompleted;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,16 +13,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index')->name('index');
+// Route::get('/', function () {
+//     return view('index');
+// });
 // Route::get('/test', function () {
 //     return App\Profile::find(1)->user;
 // });
 Auth::routes();
-
-
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'] , function() {
     Route::get('/home', 'HomeController@index')->name('home');
@@ -56,5 +57,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'] , function() {
     Route::get('user/delete/{id}', 'UsersController@destroy')->name('user.delete');
 
     Route::get('user/profile', 'ProfilesController@index')->name('user.profile');
-    Route::post('user/profile/update', 'ProfilesController@update')->name('user.profile.update'); 
+    Route::post('user/profile/update', 'ProfilesController@update')->name('user.profile.update');
+    
+    Route::get('settings', 'SettingsController@index')->name('settings');
+    Route::post('settings/update', 'SettingsController@update')->name('settings.update');
+});
+
+Route::get('/notify', function () {
+    // User::find(1)->notify(new TaskCompleted);
+    // $users = [User::find(1),User::find(2),User::find(7)];
+    $users = User::all(); //salje svim userima
+    Notification::send($users, new TaskCompleted()); //notifikacija preko facades,moze da salje na vise usera
+    //Notification::route('mail', 'bukelaboo@mail.com')->notify(new TaskCompleted); //notigfikacija za custom mail,koji nije u bazi
+    return "<h1>Notified</h1>";
 });
