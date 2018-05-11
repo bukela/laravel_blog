@@ -71,3 +71,5 @@ Route::get('/notify', function () {
     //Notification::route('mail', 'bukelaboo@mail.com')->notify(new TaskCompleted); //notigfikacija za custom mail,koji nije u bazi
     return "<h1>Notified</h1>";
 });
+
+Route::get('/email', 'HomeController@email')->name('sendEmail');

@@ -3,10 +3,15 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+// use Mail;
+use App\Mail\NewUser;
+use Auth;
 
-class SendActivationCode implements ShouldQueue
+
+class SendActivationCode
 {
     /**
      * Create the event listener.
@@ -27,5 +32,8 @@ class SendActivationCode implements ShouldQueue
     public function handle(UserRegistered $event)
     {
         \Log::info('activation', ['user' => $event->user]);
+        // Mail::to(Auth::user()->email)->send(new NewUser());
+        Mail::to('drnd@mail.com')->send(new NewUser());
+        
     }
 }
