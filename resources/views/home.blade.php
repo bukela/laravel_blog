@@ -9,7 +9,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        Welcome,
+                        Welcome, {{ Auth::user()->email }}
                     You are logged in!
                     <a href="{{ route('sendEmail') }}" class="btn btn-block btn-primary">Send Email</a>
         </div>

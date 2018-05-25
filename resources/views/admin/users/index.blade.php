@@ -25,7 +25,11 @@
                 @foreach ($users as $user)
                 <tr>
                     <td>
-                    <img src="{{ asset($user->profile->avatar) }}" alt="{{ $user->name }}" width="60px" height="60px" style="border-radius: 50%;">
+                    @if (File::exists(asset($user->avatar)))
+                        <img src="{{ asset($user->avatar) }}" alt="{{ $user->name }}" style="width="60px" height="60px" style="border-radius: 50%;"/>
+                    @else 
+                        <p>No image</p>
+                    @endif
                     </td>
                     <td>
                         {{ $user->name }}

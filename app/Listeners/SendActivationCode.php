@@ -6,9 +6,9 @@ use App\Events\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-// use Mail;
 use App\Mail\NewUser;
-use Auth;
+use App\User;
+
 
 
 class SendActivationCode
@@ -32,8 +32,8 @@ class SendActivationCode
     public function handle(UserRegistered $event)
     {
         \Log::info('activation', ['user' => $event->user]);
-        // Mail::to(Auth::user()->email)->send(new NewUser());
-        Mail::to('drnd@mail.com')->send(new NewUser());
+        // Mail::to(Auth::user()->email)->send(new NewUser()); --ne radi na ovaj nacin
+        Mail::to($event->user->email)->send(new NewUser($event->user)); //mora da se prosledi i $event->user u NewUser
         
     }
 }
